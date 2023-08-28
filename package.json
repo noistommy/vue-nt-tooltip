@@ -1,7 +1,7 @@
 {
   "name": "vue-nt-tooltip",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "MODE=demo vite",
@@ -10,11 +10,30 @@
     "build:demo": "MODE=demo vite build",
     "preview": "vite preview"
   },
-  "dependencies": {
+  "main": "./dist/nt-tooltip.umd.js",
+  "module": "./dist/nt-tooltip.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/nt-tooltip.es.js",
+      "require": "./dist/nt-tooltip.umd.js"
+    }
+  },
+  "files": ["dist", "src"],
+  "bugs": {
+    "url": "https://github.com/noistommy/vue-nt-tooltip/issues"
+  },
+  "homepage": "https://github.com/noistommy/vue-nt-tooltip#reaadme",
+  "keywords": ["vue", "tooltip", "directive"],
+  "style": "./dist/tooltip.css",
+  "peerDependencies": {
     "vue": "^3.3.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
     "vite": "^4.4.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noistommy/vue-nt-tooltip.git"
   }
 }
