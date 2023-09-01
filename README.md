@@ -23,7 +23,7 @@ import { createApp } from "vue";
 import NtTooltip from "vue-nt-tooltip";
 
 // import  style css or use yours
-import “vue-nt-tooltip/tooltip.css”;
+import “./vue-nt-tooltip/tooltip.css”;
  
 const app = createApp(...); // ...: Root Element Id
 
