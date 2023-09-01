@@ -11,6 +11,7 @@ vue-nt-tooltip
 ```sh
 $ npm install vue-nt-tooltip --save
 ```
+---
 
 ## Usage
 
@@ -29,4 +30,32 @@ const defaultOptions = {
 
 app.use(NtTooltip, defaultOptions)
 ```
+### use tooltip directive in template
 
+```html
+
+<!-- basic --> 
+<div v-nt-tooltip="`tooltip sample`"> ... </div>
+
+<!-- object type contents -->
+<div v-nt-tooltip="{ contents: 'tooltip sample'}"> ... </div>
+
+<!-- html contents --> 
+<div v-nt-tooltip="{ contents: '<span> html contents </span>'}"> ... </div>
+
+<!-- position -->
+<div v-nt-tooltip:top="{ contents: 'create up'}"> ... </div>
+<div v-nt-tooltip:bottom="{ contents: 'create down'}"> ... </div>
+
+```
+---
+## Propertice
+
+* **maxWidth**: _number_ ▶︎ `200`   
+Setting the max width size(px) of tooltip
+
+* **direction**: _string_ ▶︎ `top`   
+Setting the initial position of tooltip
+
+* **alignment**: _string_ ▶︎ `center`   
+Setting the initial position of tooltip arrow
