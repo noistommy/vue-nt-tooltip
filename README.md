@@ -49,7 +49,7 @@ app.use(NtTooltip, defaultOptions)
 
 ```
 ---
-## Propertice
+## Properties
 
 * **maxWidth**: _number_ ▶︎ `200`   
 Setting the max width size(px) of tooltip
