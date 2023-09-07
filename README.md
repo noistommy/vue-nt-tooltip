@@ -1,5 +1,6 @@
 vue-nt-tooltip
 ==============
+
 ![Static Badge](https://img.shields.io/badge/vue_3-only-%234FC08D?style=for-the-badge)
 ![Static Badge](https://img.shields.io/badge/javascript-%23F7DF1E?style=for-the-badge)
 ![Static Badge](https://img.shields.io/badge/html-%23E34F26?style=for-the-badge&logo=html)
