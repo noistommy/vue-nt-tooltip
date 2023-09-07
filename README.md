@@ -1,5 +1,13 @@
 vue-nt-tooltip
 ==============
+![Static Badge](https://img.shields.io/badge/vue_3-only-%234FC08D?style=for-the-badge)
+![Static Badge](https://img.shields.io/badge/javascript-%23F7DF1E?style=for-the-badge)
+![Static Badge](https://img.shields.io/badge/html-%23E34F26?style=for-the-badge&logo=html)
+![Static Badge](https://img.shields.io/badge/sass-%23CC6699?style=for-the-badge)
+![Static Badge](https://img.shields.io/badge/vite-bundler-%23646CFF?style=for-the-badge)
+![Static Badge](https://img.shields.io/badge/icon-font_awesome_4.7.0-%23528DD7?style=for-the-badge)
+![Static Badge](https://img.shields.io/badge/vue_directive-user_custom_with_vue_3-%234FC08D?style=for-the-badge)
+
 
   `vue-nt-tooltip` is a user-defined directive for vue. Tooltips created using `v-directive` can be represented as the element's directive properties when creating a vue template, allowing you to intuitively see the element to which the tooltip is applied. It can be displayed by passing only simple text, and you can use html to make more complex expressions. Depending on the position of the element to be displayed, the display position can be specified as `top`, `bottom`.
 
