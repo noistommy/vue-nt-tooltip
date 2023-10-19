@@ -15,6 +15,11 @@ vue-nt-tooltip
   `vue-nt-tooltip`은 vue의 사용자 정의 지시문(directive)이다. directive를 이용하여 제작된 툴팁은 vue template 작성 시 엘리먼트의 디렉티브 속성으로 표현 가능하여 톨팁이 적용된 엘리먼트를 직관적으로 확인 가능하다. 간단한 텍스트만 전달하여 표시 가능하며 좀 더 복잡한 표현을 하기위해 html을 사용 가능하다. 표시될 엘리먼트의 위치에 따라 표시 위치를 `top`, `bottom`으로 지정할수있다.
 
 ---
+## Demo
+
+[vue-nt-tooltip](https://noistommy.github.io/vue-nt-tooltip) demo page.
+
+---
 ## Installation
 
 ```sh
