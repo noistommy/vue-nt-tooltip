@@ -1,4 +1,5 @@
 let ref = null
+let opt = {}
 const showTooltip = (el, binding) => {
   if (binding.value === '') return
   if (ref) hideTooltip()
@@ -9,9 +10,15 @@ const showTooltip = (el, binding) => {
   setPositionRef(el, binding, ttEl)
 }
 
+const setOptionsRel = (options) => {
+  opt = options
+}
+
 const setAttributeRef = (reel, binding) => {
   reel.innerHTML = typeof binding.value === 'string' ? binding.value : binding.value.contents
-  reel.classList.add('ga-tooltip', 'theme-dark')
+  reel.classList.add('ga-tooltip', `theme-${opt.theme}`, opt.size)
+  reel.style.maxWidth = opt.maxWidth + 'px'
+  reel.style.textAlign = opt.textAlign
   ref = reel
 }
 
@@ -20,14 +27,19 @@ const setPositionRef = (el, binding, ref) => {
   const h = window.innerHeight
   let dir = binding.arg || 'top'
   let align = 'center'
+  if (Object.keys(binding.modifiers).length > 0) {
+    align = Object.keys(binding.modifiers)[0]
+  }
   const ePos = el.getBoundingClientRect()
   const refPos = ref.getBoundingClientRect()
-  let tPos = ePos.top - refPos.height - 10
-  let bPos = ePos.top + ePos.height + 10
+
+  const offset = opt.offset || 10
+  let tPos = ePos.top - refPos.height - offset
+  let bPos = ePos.top + ePos.height + offset
   if (dir === 'top' && tPos < 0) {
     dir = 'bottom'
   }
-  if (dir === 'bottom' && h - ePos.bottom - (10 + refPos.height) < 0) {
+  if (dir === 'bottom' && h - ePos.bottom - (offset + refPos.height) < 0) {
     dir = 'top'
   }
   ref.style.top = dir === 'top' ? tPos + 'px' : bPos + 'px'
@@ -36,7 +48,7 @@ const setPositionRef = (el, binding, ref) => {
   if (align === 'center' && cPos < 0) {
     align = 'start'
   }
-  if (w - ePos.right - refPos.width / 2 < 0) {
+  if (w - ePos.right - (refPos.width / 2 - ePos.width / 2) < 0) {
     align = 'end'
   }
   ref.style.left = align === 'center' ? cPos + 'px' : align === 'end' ? endPos + 'px' : ePos.left + 'px'
@@ -48,7 +60,7 @@ const hideTooltip = () => {
     ref.remove()
   }
 }
-const tooltipDirective = () => {
+const tooltipDirective = (options) => {
   let show
   let hide
   const createEvent = (el, binding) => {
@@ -70,7 +82,10 @@ const tooltipDirective = () => {
   }
   return {
     // v-ga-tooltip:arg.modifiers
-    // created(el, binding, vnode, prevVnode) {},
+    created(el, binding) {
+      removeEvent(el)
+      setOptionsRel(options)
+    },
     // 엘리먼트가 mount 되기 전 호출 -> bind
     // beforeMount(el, binding) {
     //   console.log(binding, options)

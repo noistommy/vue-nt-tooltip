@@ -7,7 +7,9 @@ const defaultOptions = {
   theme: 'dark',
   direction: 'top',
   alignment: 'center',
-  transition: 'line'
+  transition: 'linear',
+  textAlign: 'left',
+  offset: 10
 }
 export default {
   install(app, options = {}) {
