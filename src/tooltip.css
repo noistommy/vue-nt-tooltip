@@ -1,49 +1,92 @@
-.ga-tooltip {
+.base-tooltip {
     pointer-events: none;
     width: max-content;
-    text-align: left;
-    padding: 5px 20px;
     position: fixed;
     top: 50%;
     left: 50%;
     z-index: 9999;
     word-break: break-all;
-    color: #000;
-    background-color: #fff;
     filter: drop-shadow(0 0 5px #50505033);
-    border-radius: 4px;
 }
-.ga-tooltip.small {
+.base-tooltip.small {
      padding: 5px 10px;
      font-size: .8em;
 }
-.ga-tooltip::after {
+.base-tooltip::after {
      content: '';
      position: absolute;
      width: 10px;
-     height: 6px;
+     height: 10px;
      clip-path: polygon(0 0, 100% 0, 50% 100%);
      background-color: inherit;
-     margin-top: -1px;
+     margin: -1px;
 }
-.ga-tooltip.theme-dark {
+
+.base-tooltip:where([class*='top'], [class*='bottom'])::after {
+  width: 10px;
+  height: 6px;
+}
+.base-tooltip:where([class*='left'], [class*='right'])::after {
+  width: 6px;
+  height: 10px;
+}
+.base-tooltip.theme-dark {
      background-color: #505050;
      color: #ffffff;
 }
-.ga-tooltip[class*='top']::after {
+.base-tooltip[class*='top']::after {
      top: 100%;
 }
-.ga-tooltip[class*='bottom']::after {
+.base-tooltip[class*='bottom']::after {
      bottom: 100%;
      clip-path: polygon(0 100%, 50% 0, 100% 100%);
 }
-.ga-tooltip[class*='start']::after {
-     left: 10%;
+.base-tooltip[class*='left']::after {
+  left: 100%;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
-.ga-tooltip[class*='center']::after {
+
+.base-tooltip[class*='right']::after {
+  right: 100%;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.base-tooltip.top-start::after,
+.base-tooltip.bottom-start::after {
+     left: max(10%, 1em);
+}
+.base-tooltip.top-center::after,
+.base-tooltip.bottom-center::after {
      left: 50%;
      transform: translateX(-50%);
 }
-.ga-tooltip[class*='end']::after {
-     left: 90%;
+.base-tooltip.top-end::after,
+.base-tooltip.bottom-end::after {
+     right: max(10%, 1em);
+     /* transform: translateX(-100%); */
+}
+
+.base-tooltip.left-start::after,
+.base-tooltip.right-start::after {
+  top: max(10%, 1em);
+}
+.base-tooltip.left-center::after,
+.base-tooltip.right-center::after {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.base-tooltip.left-end::after,
+.base-tooltip.right-end::after {
+  bottom:  max(10%, 1em);
+  /* transform: translateY(-100%); */
+}
+
+.ga-tooltip {
+  color: #000;
+  background-color: #fff;
+  padding: 5px 20px;
+
+  filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.16));
+  border-radius: 8px;
+  
 }

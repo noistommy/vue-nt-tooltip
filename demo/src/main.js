@@ -10,7 +10,7 @@ app.use(NtTooltip, {
     trigger: 'hover',
     maxWidth: 200,
     size: 'normal',
-    theme: 'light',
+    theme: 'dark',
     direction: 'top',
     alignment: 'center',
     transition: 'line'

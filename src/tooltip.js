@@ -16,9 +16,9 @@ const setOptionsRel = (options) => {
 
 const setAttributeRef = (reel, binding) => {
   reel.innerHTML = typeof binding.value === 'string' ? binding.value : binding.value.contents
-  reel.classList.add('ga-tooltip', `theme-${opt.theme}`, opt.size)
+  reel.classList.add('base-tooltip', opt.customClass , `theme-${opt.theme}`, opt.size)
   reel.style.maxWidth = opt.maxWidth + 'px'
-  reel.style.textAlign = opt.textAlign
+  reel.style.textAlign = binding.value.align || opt.textAlign
   ref = reel
 }
 
@@ -34,24 +34,53 @@ const setPositionRef = (el, binding, ref) => {
   const refPos = ref.getBoundingClientRect()
 
   const offset = opt.offset || 10
+
   let tPos = ePos.top - refPos.height - offset
-  let bPos = ePos.top + ePos.height + offset
-  if (dir === 'top' && tPos < 0) {
-    dir = 'bottom'
+  let bPos = ePos.bottom + offset
+
+  let lPos = ePos.left - (refPos.width + offset)
+  let rPos = ePos.right + offset
+
+  if (dir === 'top' && tPos < 0) dir = 'bottom'
+  if (dir === 'bottom' && h - (bPos + refPos.height) < 0) dir = 'top'
+
+  if (dir === 'left' && lPos < 0) dir = 'right'
+  if (dir === 'right' && w - (rPos + ref.width) < 0) dir = 'left'
+  
+  if (dir === 'top' || dir === 'bottom') {
+    ref.style.top = dir === 'top' ? tPos + 'px' : bPos + 'px'
+    const cPos = ePos.left + ePos.width / 2 - refPos.width / 2
+    const endPos = ePos.right - refPos.width
+    if (ePos.width >= refPos.width ) {
+      align = 'center'
+    } else {
+      if (align === 'center' && cPos < 0) {
+        align = 'start'
+      }
+      if (w - ePos.right - (refPos.width / 2 - ePos.width / 2) < 0) {
+        align = 'end'
+      }
+    }
+    ref.style.left = align === 'center' ? cPos + 'px' : align === 'end' ? endPos + 'px' : ePos.left + 'px'
+  } else {
+    ref.style.left = dir === 'left' ? `${lPos}px` : `${rPos}px`
+    const cPos = ePos.top + ePos.height / 2 - refPos.height / 2
+    const endPos = ePos.bottom - refPos.height
+
+    if (ePos.height >= refPos.height) {
+      align='center'
+    } else {
+      if (align === 'center' && cPos < 0) {
+        align = 'start'
+      }
+      if (w - ePos.right - (refPos.width / 2 - ePos.width / 2) < 0) {
+        align = 'end'
+      }
+    }
+    ref.style.top = align === 'center' ? cPos + 'px' : align === 'end' ? endPos + 'px' : ePos.top + 'px'
+
   }
-  if (dir === 'bottom' && h - ePos.bottom - (offset + refPos.height) < 0) {
-    dir = 'top'
-  }
-  ref.style.top = dir === 'top' ? tPos + 'px' : bPos + 'px'
-  const cPos = ePos.left + ePos.width / 2 - refPos.width / 2
-  const endPos = ePos.right - refPos.width
-  if (align === 'center' && cPos < 0) {
-    align = 'start'
-  }
-  if (w - ePos.right - (refPos.width / 2 - ePos.width / 2) < 0) {
-    align = 'end'
-  }
-  ref.style.left = align === 'center' ? cPos + 'px' : align === 'end' ? endPos + 'px' : ePos.left + 'px'
+
   ref.classList.add(`${dir}-${align}`)
 }
 
@@ -63,21 +92,43 @@ const hideTooltip = () => {
 const tooltipDirective = (options) => {
   let show
   let hide
+  let toggle
+  let isShow = false
   const createEvent = (el, binding) => {
     show = () => {
       showTooltip(el, binding)
+      isShow = true
     }
     hide = () => {
       hideTooltip()
+      isShow = false
     }
-    el.addEventListener('mouseenter', show)
-    el.addEventListener('mouseleave', hide)
+    toggle = () => {
+      if (isShow) {
+        hideTooltip()
+      } else {
+        showTooltip(el, binding)
+      }
+      isShow = !isShow
+    }
+    if (options.trigger === 'click') {
+      el.addEventListener('click', toggle)
+    }
+    if (options.trigger === 'hover') {
+      el.addEventListener('mouseenter', show)
+      el.addEventListener('mouseleave', hide)
+    }
   }
   const removeEvent = el => {
     if (show && hide) {
       hide()
-      el.removeEventListener('mouseenter', show)
-      el.removeEventListener('mouseleave', hide)
+      if (options.trigger === 'click') {
+        el.removeEventListener('click', toggle)
+      }
+      if (options.trigger === 'hover') {
+        el.removeEventListener('mouseenter', show)
+        el.removeEventListener('mouseleave', hide)
+      }
     }
   }
   return {

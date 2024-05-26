@@ -5,6 +5,8 @@ defineProps({
   msg: String,
 })
 
+const p = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam bibendum nec dui eu dictum. Aliquam erat volutpat. Vivamus accumsan urna leo, tempus fermentum nunc iaculis a.'
+
 const count = ref(0)
 </script>
 
@@ -29,7 +31,7 @@ const count = ref(0)
       </div>
       <div class="column span-4 align-center">
         <button class="ga-button" v-nt-tooltip="`String type`">테스트</button>
-        <button class="ga-button" v-nt-tooltip="{contents: 'Object type'}">테스트</button>
+        <button class="ga-button" v-nt-tooltip="{contents: 'Object type', align: 'right'}">테스트</button>
       </div>
     </div>
   </div>
@@ -46,11 +48,11 @@ const count = ref(0)
   </div>
   <div class="ga-message">
     <div class="ga-grid">
-      <div class="column span-8">
+      <div class="column span-6">
         <h4>생성 위치 설정</h4>
-        <p class="sub-title">위쪽 또는 아래쪽으로 생성함.</p>
+        <p class="sub-title">위쪽, 아래쪽, 왼쪽, 오른쪽으로 생성함.</p>
       </div>
-      <div class="column span-4 align-center">
+      <div class="column span-6 align-center">
         <button class="ga-button icon" v-nt-tooltip="`위쪽으로 생성`">
           <i class="fa fa-arrow-up"></i>
           TOP
@@ -59,6 +61,58 @@ const count = ref(0)
           <i class="fa fa-arrow-down"></i>
           DOWN
         </button>
+        <button class="ga-button icon" v-nt-tooltip:left.start="{contents: '왼쪽으로 생성'}">
+          <i class="fa fa-arrow-left"></i>
+          LEFT
+        </button>
+        <button class="ga-button icon" v-nt-tooltip:right.end="`오른쪽으로 생성`">
+          RIGHT
+          <i class="fa fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="ga-message">
+    <h4>방향 및 정렬 </h4>
+    <div class="ga-grid2" >
+      <div class="column col-3">
+      </div>
+      <div class="column col-6 " :style="{ 'textAlign': 'center' }">
+        <button class="ga-button" v-nt-tooltip:top.start="`TOP-START<br>${p}`">T-START</button>
+        <button class="ga-button" v-nt-tooltip:top="`TOP-CENTER<br>${p}`">T-CENTER</button>
+        <button class="ga-button" v-nt-tooltip:top.end="`TOP-END<br>${p}`">T-END</button>
+      </div>
+      <div class="column col-3">
+      </div>
+      <div class="column col-3">
+        <button class="ga-button fluid" v-nt-tooltip:left.start="`LEFT-START<br>${p}`">L-START</button>
+      </div>
+      <div class="column col-6"></div>
+      <div class="column col-3">
+        <button class="ga-button fluid" v-nt-tooltip:right.start="`RIGHT-START<br>${p}`">R-START</button>
+      </div>
+      <div class="column col-3">
+        <button class="ga-button fluid" v-nt-tooltip:left.center="`LEFT-CENTER<br>${p}`">L-CENTER</button>
+      </div>
+      <div class="column col-6"></div>
+      <div class="column col-3">
+        <button class="ga-button fluid" v-nt-tooltip:right.center="`RIGHT-CENTER<br>${p}`">R-CENTER</button>
+      </div>
+      <div class="column col-3">
+        <button class="ga-button fluid" v-nt-tooltip:left.end="`LEFT-ENDbr>${p}`">L-END</button>
+      </div>
+      <div class="column col-6"></div>
+      <div class="column col-3">
+        <button class="ga-button fluid" v-nt-tooltip:right.end="`RIGHT-END<br>${p}`">R-END</button>
+      </div>
+      <div class="column col-3">
+      </div>
+      <div class="column col-6"  :style="{ 'textAlign': 'center' }">
+        <button class="ga-button" v-nt-tooltip:bottom.start="`BOTTOM-START<br>${p}`">B-START</button>
+        <button class="ga-button" v-nt-tooltip:bottom="`BOTTOM-CENTER<br>${p}`">B-CENTER</button>
+        <button class="ga-button" v-nt-tooltip:bottom.end="`BOTTOM-END<br>${p}`">B-END</button>
+      </div>
+      <div class="column col-3">
       </div>
     </div>
   </div>
@@ -94,4 +148,13 @@ const count = ref(0)
   width: 100%;
   left: 0;
 }
+.ga-message {
+  padding: 15px 20px;
+  border-radius: 4px;
+  background-color: #333;
+  border: 1px solid #464646;
+  color: #999;
+  margin-bottom: 5px;
+}
 </style>
+top

@@ -9,7 +9,8 @@ const defaultOptions = {
   alignment: 'center',
   transition: 'linear',
   textAlign: 'left',
-  offset: 10
+  offset: 10,
+  customClass: 'ga-tooltip'
 }
 export default {
   install(app, options = {}) {
