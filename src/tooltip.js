@@ -45,7 +45,7 @@ const setPositionRef = (el, binding, ref) => {
   if (dir === 'bottom' && h - (bPos + refPos.height) < 0) dir = 'top'
 
   if (dir === 'left' && lPos < 0) dir = 'right'
-  if (dir === 'right' && w - (rPos + ref.width) < 0) dir = 'left'
+  if (dir === 'right' && w - (rPos + refPos.width) < 0) dir = 'left'
   
   if (dir === 'top' || dir === 'bottom') {
     ref.style.top = dir === 'top' ? tPos + 'px' : bPos + 'px'
