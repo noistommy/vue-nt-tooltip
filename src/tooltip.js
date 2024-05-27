@@ -73,7 +73,7 @@ const setPositionRef = (el, binding, ref) => {
       if (align === 'center' && cPos < 0) {
         align = 'start'
       }
-      if (w - ePos.right - (refPos.width / 2 - ePos.width / 2) < 0) {
+      if (w - ePos.bottom - (refPos.height / 2 - ePos.height / 2) < 0) {
         align = 'end'
       }
     }
