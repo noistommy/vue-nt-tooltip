@@ -4,7 +4,7 @@ import './frogui.css'
 import App from './App.vue'
 const app = createApp(App)
 
-import NtTooltip from '../../src'
+import { NtTooltip } from '../../src'
 
 app.use(NtTooltip, {
     trigger: 'hover',

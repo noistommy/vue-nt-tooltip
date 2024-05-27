@@ -133,7 +133,7 @@ const tooltipDirective = (options) => {
   }
   return {
     // v-ga-tooltip:arg.modifiers
-    created(el, binding) {
+    bind(el, binding) {
       removeEvent(el)
       setOptionsRel(options)
     },
@@ -142,7 +142,7 @@ const tooltipDirective = (options) => {
     //   console.log(binding, options)
     // },
     // 엘리먼트가 mount 된 후 호출 -> inserted
-    mounted(el, binding) {
+    inserted(el, binding) {
       createEvent(el, binding)
     },
     // parent component 가 업데이트 되기 전 호출
@@ -159,7 +159,7 @@ const tooltipDirective = (options) => {
     // parent component 가 unmount 되기 전 호출
     // beforeUnmount(el, binding, vnode, prevVnode) {},
     // parent component 가 unmount 된 후 호출 -> unbind
-    unmounted(el) {
+    unbind(el) {
       // hide()
       removeEvent(el)
     }

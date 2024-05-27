@@ -38079,9 +38079,9 @@ h5, .h5 {
 .ga-message:last-child {
   margin: 0;
 }
-.ga-message:hover {
-  background-color: var(--suf);
-}
+/* .ga-message:hover { */
+  /* background-color: var(--suf); */
+/* } */
 .ga-message.align-left {
   text-align: left;
 }

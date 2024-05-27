@@ -151,8 +151,7 @@ const count = ref(0)
 .ga-message {
   padding: 15px 20px;
   border-radius: 4px;
-  background-color: #333;
-  border: 1px solid #464646;
+
   color: #999;
   margin-bottom: 5px;
 }
