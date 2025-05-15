@@ -8,6 +8,7 @@ defineProps({
 const p = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam bibendum nec dui eu dictum. Aliquam erat volutpat. Vivamus accumsan urna leo, tempus fermentum nunc iaculis a.'
 
 const count = ref(0)
+
 </script>
 
 <template>
@@ -20,6 +21,30 @@ const count = ref(0)
       </div>
       <div class="column span-4 align-center">
         <button class="ga-button" v-nt-tooltip="`기본`">기본</button>
+      </div>
+    </div>
+  </div>
+  <div class="ga-message">
+    <div class="ga-grid">
+      <div class="column span-8">
+        <h4>사용 설정</h4>
+        <p class="sub-title">사용자 동적 사용 설정</p>
+      </div>
+      <div class="column span-4 align-center">
+        <button class="ga-button" v-nt-tooltip="{ contents: '사용', isUse: true }">isUse: True</button>
+        <button class="ga-button" v-nt-tooltip="{ contents: '사용', isUse: false }">isUse: False</button>
+      </div>
+    </div>
+  </div>
+  <div class="ga-message">
+    <div class="ga-grid">
+      <div class="column span-8">
+        <h4>트리거</h4>
+        <p class="sub-title">실행 트리거 설정</p>
+      </div>
+      <div class="column span-4 align-center">
+        <button class="ga-button" v-nt-tooltip="{ contents: 'Hover'}">Hover::Default</button>
+        <button class="ga-button" v-nt-tooltip="{ contents: '사용', trigger: 'click' }">Click</button>
       </div>
     </div>
   </div>
@@ -116,9 +141,9 @@ const count = ref(0)
       </div>
     </div>
   </div>
-  <div class="ga-message fixed">
+  <div class="ga-message fixed left">
     <div class="ga-grid">
-      <div class="column span-2">
+      <div class="column span-4">
         <button class="ga-button icon" v-nt-tooltip="`완쪽 정렬 보정`">
           <i class="fa fa-arrow-left"></i>
           START
@@ -126,9 +151,17 @@ const count = ref(0)
       </div>
       <div class="column span-8" :style="{'textAlign': 'center'}">
         <h4>정렬 및 정렬 보정 설정</h4>
-        <p class="sub-title">기본: 중앙 정렬 | 대상 요소 위치에 따라 정렬 자동 보정</p>
+        <p class="sub-title">대상 요소 위치에 따라 정렬 자동 보정</p>
       </div>
-      <div class="column span-2" :style="{'textAlign': 'right'}">  
+    </div>
+  </div>
+  <div class="ga-message fixed right">
+    <div class="ga-grid">
+      <div class="column span-8" :style="{'textAlign': 'center'}">
+        <h4>정렬 및 정렬 보정 설정</h4>
+        <p class="sub-title">대상 요소 위치에 따라 정렬 자동 보정</p>
+      </div>
+      <div class="column span-4" :style="{'textAlign': 'right'}">  
         <button class="ga-button icon" v-nt-tooltip="`오른쪽 정렬 보정`">
           END
           <i class="fa fa-arrow-right"></i>
@@ -145,8 +178,14 @@ const count = ref(0)
 .fixed {
   padding: 5px;
   position: fixed;
-  width: 100%;
-  left: 0;
+  width: 400px;
+  bottom: 50%;
+  &.left {
+    left: 0
+  }
+  &.right {
+    right: 0;
+  }
 }
 .ga-message {
   padding: 15px 20px;
@@ -157,4 +196,3 @@ const count = ref(0)
   margin-bottom: 5px;
 }
 </style>
-top

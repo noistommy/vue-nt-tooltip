@@ -2,23 +2,34 @@ let ref = null
 let opt = {}
 const showTooltip = (el, binding) => {
   if (binding.value === '') return
+  if (!binding.opt.isUse) return
   if (ref) hideTooltip()
   const ttEl = document.createElement('div')
 
   setAttributeRef(ttEl, binding)
-  document.body.append(ttEl)
+  if (binding.value.self) {
+    el.append(ttEl)
+  } else {
+    document.body.append(ttEl)
+  }
   setPositionRef(el, binding, ttEl)
 }
 
-const setOptionsRel = (options) => {
+const setOptionsRel = (binding, options) => {
   opt = options
+  binding.opt = {}
+  binding.opt.trigger = binding.value.trigger || opt.trigger
+  binding.opt.isUse = binding.value.isUse === undefined ? opt.isUse : binding.value.isUse
 }
 
 const setAttributeRef = (reel, binding) => {
-  reel.innerHTML = typeof binding.value === 'string' ? binding.value : binding.value.contents
+  reel.innerHTML = typeof binding.value === 'object' ? binding.value.contents : binding.value
   reel.classList.add('base-tooltip', opt.customClass , `theme-${opt.theme}`, opt.size)
-  reel.style.maxWidth = opt.maxWidth + 'px'
-  reel.style.textAlign = binding.value.align || opt.textAlign
+  reel.style.maxWidth = binding.value.size ? binding.value.size + 'px' : opt.maxWidth + 'px'
+  if (binding.value.padding) {
+    reEl.style.padding = binding.value.padding
+  }
+  reel.style.textAlign = binding.value.textAlign ? binding.value.textAlign : opt.textAlign
   ref = reel
 }
 
@@ -34,6 +45,7 @@ const setPositionRef = (el, binding, ref) => {
   const refPos = ref.getBoundingClientRect()
 
   const offset = opt.offset || 10
+  const alignOffset = binding.value.offset || 0
 
   let tPos = ePos.top - refPos.height - offset
   let bPos = ePos.bottom + offset
@@ -61,7 +73,7 @@ const setPositionRef = (el, binding, ref) => {
         align = 'end'
       }
     }
-    ref.style.left = align === 'center' ? cPos + 'px' : align === 'end' ? endPos + 'px' : ePos.left + 'px'
+    ref.style.left = align === 'center' ? cPos + 'px' : align === 'end' ? alignOffset + endPos + 'px' : alignOffset + ePos.left + 'px'
   } else {
     ref.style.left = dir === 'left' ? `${lPos}px` : `${rPos}px`
     const cPos = ePos.top + ePos.height / 2 - refPos.height / 2
@@ -111,10 +123,11 @@ const tooltipDirective = (options) => {
       }
       isShow = !isShow
     }
-    if (options.trigger === 'click') {
+    const trigger = binding.opt?.trigger || options.trigger
+    if (trigger === 'click') {
       el.addEventListener('click', toggle)
     }
-    if (options.trigger === 'hover') {
+    if (trigger === 'hover') {
       el.addEventListener('mouseenter', show)
       el.addEventListener('mouseleave', hide)
     }
@@ -122,10 +135,10 @@ const tooltipDirective = (options) => {
   const removeEvent = el => {
     if (show && hide) {
       hide()
-      if (options.trigger === 'click') {
+      if (trigger === 'click') {
         el.removeEventListener('click', toggle)
       }
-      if (options.trigger === 'hover') {
+      if (trigger === 'hover') {
         el.removeEventListener('mouseenter', show)
         el.removeEventListener('mouseleave', hide)
       }
@@ -135,7 +148,7 @@ const tooltipDirective = (options) => {
     // v-ga-tooltip:arg.modifiers
     created(el, binding) {
       removeEvent(el)
-      setOptionsRel(options)
+      setOptionsRel(binding, options)
     },
     // 엘리먼트가 mount 되기 전 호출 -> bind
     // beforeMount(el, binding) {

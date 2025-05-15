@@ -13,6 +13,7 @@ app.use(NtTooltip, {
     theme: 'dark',
     direction: 'top',
     alignment: 'center',
-    transition: 'line'
+    transition: 'line',
+    isUse: true
 })
 app.mount('#app')
