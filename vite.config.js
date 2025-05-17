@@ -41,6 +41,7 @@ const libConfig = {
 const demoConfig = defineConfig({
   ...commonConfig,
   root: "./demo",
+  base: process.env.NODE_ENV === 'production' ? '/vue-nt-tooltip/' : '/',
 })
 
 // https://vitejs.dev/config/
