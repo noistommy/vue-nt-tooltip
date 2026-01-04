@@ -2,7 +2,7 @@ let ref = null
 let opt = {}
 const showTooltip = (el, binding) => {
   if (binding.value === '') return
-  if (!binding.opt.isUse) return
+  
   if (ref) hideTooltip()
   const ttEl = document.createElement('div')
 
@@ -18,13 +18,13 @@ const showTooltip = (el, binding) => {
 const setOptionsRel = (binding, options) => {
   opt = options
   binding.opt = {}
-  binding.opt.trigger = binding.value.trigger || opt.trigger
+  binding.opt.trigger = binding.value.trigger || 'hover'
   binding.opt.isUse = binding.value.isUse === undefined ? opt.isUse : binding.value.isUse
 }
 
 const setAttributeRef = (reel, binding) => {
   reel.innerHTML = typeof binding.value === 'object' ? binding.value.contents : binding.value
-  reel.classList.add('base-tooltip', opt.customClass , `theme-${opt.theme}`, opt.size)
+  reel.classList.add('base-tooltip', opt.customClass , `theme-${binding.value?.theme || opt.theme}`, opt.size)
   reel.style.maxWidth = binding.value.size ? binding.value.size + 'px' : opt.maxWidth + 'px'
   if (binding.value.padding) {
     reEl.style.padding = binding.value.padding
@@ -118,12 +118,14 @@ const tooltipDirective = (options) => {
     toggle = () => {
       if (isShow) {
         hideTooltip()
+        isShow = false
       } else {
         showTooltip(el, binding)
+        isShow = true
       }
       isShow = !isShow
     }
-    const trigger = binding.opt?.trigger || options.trigger
+    const trigger = binding.value?.trigger || options.trigger
     if (trigger === 'click') {
       el.addEventListener('click', toggle)
     }
@@ -135,13 +137,9 @@ const tooltipDirective = (options) => {
   const removeEvent = el => {
     if (show && hide) {
       hide()
-      if (trigger === 'click') {
-        el.removeEventListener('click', toggle)
-      }
-      if (trigger === 'hover') {
-        el.removeEventListener('mouseenter', show)
-        el.removeEventListener('mouseleave', hide)
-      }
+      el.removeEventListener('click', toggle)
+      el.removeEventListener('mouseenter', show)
+      el.removeEventListener('mouseleave', hide)
     }
   }
   return {
@@ -156,6 +154,7 @@ const tooltipDirective = (options) => {
     // },
     // 엘리먼트가 mount 된 후 호출 -> inserted
     mounted(el, binding) {
+      if (!binding.opt.isUse) return
       createEvent(el, binding)
     },
     // parent component 가 업데이트 되기 전 호출
@@ -163,8 +162,7 @@ const tooltipDirective = (options) => {
     // },
     // parent, child component 가 업데이트 된 후 노출
     updated(el, binding) {
-      // hide()
-      // removeEvent(el)
+      removeEvent(el)
       if (binding.value !== binding.oldValue) {
         createEvent(el, binding)
       }
