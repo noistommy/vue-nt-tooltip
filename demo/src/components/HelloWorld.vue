@@ -95,7 +95,7 @@ const codes = computed(() => {
   </div>
   <CodeBlock :theme="theme" :code="codes.theme" />
 </WelcomeItem>
-<!-- <WelcomeItem>
+<WelcomeItem>
   <template #icon>
     <i class="xi-location-arrow"></i>
   </template>
@@ -106,11 +106,11 @@ const codes = computed(() => {
   <div class="ga-segment border">
     <div class="contents">
       <button class="ga-button" v-nt-tooltip="{ contents: 'Hover', trigger: 'hover'}" @mouseenter="setTrigger('hover')">Hover::Default</button>
-      <button class="ga-button" v-nt-tooltip="{ contents: '사용', trigger: 'click' }" @mouseenter="setTrigger('click')">Click</button>
+      <button class="ga-button" v-nt-tooltip="{ contents: 'Hover', trigger: 'click' }" @mouseenter="setTrigger('click')">Click</button>
     </div>
   </div>
-  <CodeBlock :theme="theme" :theme="theme" :code="trigger === 'hover' ? codes.hover : codes.click" />
-</WelcomeItem> -->
+  <CodeBlock :theme="theme" :code="trigger === 'hover' ? codes.hover : codes.click" />
+</WelcomeItem>
 <WelcomeItem>
   <template #icon>
     <i class="xi-text-format"></i>

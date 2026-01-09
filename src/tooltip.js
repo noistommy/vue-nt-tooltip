@@ -101,6 +101,35 @@ const hideTooltip = () => {
     ref.remove()
   }
 }
+
+const isBindingValueChanged = (newVal, oldVal) => {
+  // 둘 다 null/undefined면 변경 없음
+  if (!newVal && !oldVal) return false
+  // 하나만 null/undefined면 변경 있음
+  if (!newVal || !oldVal) return true
+  
+  // 둘 다 문자열이면 직접 비교
+  if (typeof newVal === 'string' && typeof oldVal === 'string') {
+    return newVal !== oldVal
+  }
+  
+  // 하나는 문자열, 하나는 객체면 변경 있음
+  if (typeof newVal !== typeof oldVal) return true
+  
+  // 둘 다 객체면 주요 속성 비교
+  if (typeof newVal === 'object' && typeof oldVal === 'object') {
+    const keys = ['contents', 'trigger', 'theme', 'isUse', 'self', 'size', 'padding', 'textAlign', 'offset']
+    for (const key of keys) {
+      if (newVal[key] !== oldVal[key]) {
+        return true
+      }
+    }
+    return false
+  }
+  
+  return newVal !== oldVal
+}
+
 const tooltipDirective = (options) => {
   let show
   let hide
@@ -115,7 +144,7 @@ const tooltipDirective = (options) => {
       hideTooltip()
       isShow = false
     }
-    toggle = () => {
+    toggle = () => { 
       if (isShow) {
         hideTooltip()
         isShow = false
@@ -123,7 +152,7 @@ const tooltipDirective = (options) => {
         showTooltip(el, binding)
         isShow = true
       }
-      isShow = !isShow
+      console.log(isShow)
     }
     const trigger = binding.value?.trigger || options.trigger
     if (trigger === 'click') {
@@ -132,14 +161,20 @@ const tooltipDirective = (options) => {
     if (trigger === 'hover') {
       el.addEventListener('mouseenter', show)
       el.addEventListener('mouseleave', hide)
+
+      el.addEventListener('touchstart', show)
+      el.addEventListener('touchend', hide)
     }
   }
   const removeEvent = el => {
     if (show && hide) {
       hide()
       el.removeEventListener('click', toggle)
+      
       el.removeEventListener('mouseenter', show)
       el.removeEventListener('mouseleave', hide)
+      el.removeEventListener('touchstart', show)
+      el.removeEventListener('touchend', hide)
     }
   }
   return {
@@ -163,7 +198,7 @@ const tooltipDirective = (options) => {
     // parent, child component 가 업데이트 된 후 노출
     updated(el, binding) {
       removeEvent(el)
-      if (binding.value !== binding.oldValue) {
+      if (isBindingValueChanged(binding.value, binding.oldValue)) { 
         createEvent(el, binding)
       }
     },
