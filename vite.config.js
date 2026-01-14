@@ -42,6 +42,9 @@ const demoConfig = defineConfig({
   ...commonConfig,
   root: "./demo",
   base: process.env.NODE_ENV === 'production' ? '/vue-nt-tooltip/' : '/',
+  server: {
+    port: 5903
+  }
 })
 
 // https://vitejs.dev/config/

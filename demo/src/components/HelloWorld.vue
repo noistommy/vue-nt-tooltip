@@ -182,52 +182,52 @@ const codes = computed(() => {
   </template>
   <div class="ga-segment border">
     <div class="contents">
-      <div class="ga-grid2" >
-          <div class="column col-3">
+      <div class="ga-grid2 tooltip-grid" >
+          <div class="column col-3 col-xs-12">
             <button class="ga-button text fluid">Top | Left</button>
           </div>
-          <div class="column col-6 " :style="{ 'textAlign': 'center' }">
+          <div class="column col-6  col-xs-12" :style="{ 'textAlign': 'center' }">
             <button class="ga-button" v-nt-tooltip:top.end="`TOP-END<br>${p}`" @mouseenter="setAlign('top.start')">T-END</button>
             <button class="ga-button" v-nt-tooltip:top="`TOP-CENTER<br>${p}`" @mouseenter="setAlign('top.center')">T-CENTER</button>
             <button class="ga-button" v-nt-tooltip:top.start="`TOP-START<br>${p}`" @mouseenter="setAlign('top.end')">T-START</button>
           </div>
-          <div class="column col-3">
+          <div class="column col-3 col-xs-12">
             <button class="ga-button text fluid">Top | Right</button>
           </div>
 
-          <div class="column col-3">
+          <div class="column col-3 col-xs-12">
             <button class="ga-button fluid" v-nt-tooltip:left.end="`LEFT-END<br>${p}`" @mouseenter="setAlign('left.end')">L-END</button>
           </div>
-          <div class="column col-6"></div>
-          <div class="column col-3">
+          <div class="column col-6 col-xs-12"></div>
+          <div class="column col-3 col-xs-12">
             <button class="ga-button fluid" v-nt-tooltip:right.end="`RIGHT-END<br>${p}`" @mouseenter="setAlign('right.end')">R-END</button>
           </div>
 
-          <div class="column col-3">
+          <div class="column col-3 col-xs-12">
             <button class="ga-button fluid" v-nt-tooltip:left.center="`LEFT-CENTER<br>${p}`" @mouseenter="setAlign('left.center')">L-CENTER</button>
           </div>
-          <div class="column col-6"></div>
-          <div class="column col-3">
+          <div class="column col-6 col-xs-12"></div>
+          <div class="column col-3 col-xs-12">
             <button class="ga-button fluid" v-nt-tooltip:right.center="`RIGHT-CENTER<br>${p}`" @mouseenter="setAlign('right.center')">R-CENTER</button>
           </div>
 
-          <div class="column col-3">
+          <div class="column col-3 col-xs-12">
             <button class="ga-button fluid" v-nt-tooltip:left.start="`LEFT-START<br>${p}`" @mouseenter="setAlign('left.start')">L-START</button>
           </div>
-          <div class="column col-6"></div>
-          <div class="column col-3">
+          <div class="column col-6 col-xs-12"></div>
+          <div class="column col-3 col-xs-12">
             <button class="ga-button fluid" v-nt-tooltip:right.start="`RIGHT-START<br>${p}`" @mouseenter="setAlign('right.start')">R-START</button>
           </div>
 
-          <div class="column col-3">
+          <div class="column col-3 col-xs-12">
             <button class="ga-button text fluid">Bottom | Left</button>
           </div>
-          <div class="column col-6"  :style="{ 'textAlign': 'center' }">
+          <div class="column col-6 col-xs-12"  :style="{ 'textAlign': 'center' }">
             <button class="ga-button" v-nt-tooltip:bottom.end="`BOTTOM-END<br>${p}`" @mouseenter="setAlign('bottom.end')">B-END</button>
             <button class="ga-button" v-nt-tooltip:bottom="`BOTTOM-CENTER<br>${p}`" @mouseenter="setAlign('bottom.center')">B-CENTER</button>
             <button class="ga-button" v-nt-tooltip:bottom.start="`BOTTOM-START<br>${p}`" @mouseenter="setAlign('bottom.start')">B-START</button>
           </div>
-          <div class="column col-3">
+          <div class="column col-3 col-xs-12">
             <button class="ga-button text fluid">Buttom | Right</button>
           </div>
       </div>
@@ -277,7 +277,7 @@ const codes = computed(() => {
   </div>
   <div class="fixed left">
     <div class="contents">
-      <button class="ga-button icon" v-nt-tooltip="`왼쪽 정렬 보정`">
+      <button class="ga-button icon" v-nt-tooltip="`왼쪽 컨텐츠 충돌 시 왼쪽 정렬로 보정`">
         Center -> Start 보정
         <i class="fa fa-arrow-right"></i>
       </button>
@@ -285,7 +285,7 @@ const codes = computed(() => {
   </div>
   <div class="fixed right">
     <div class="contents">
-      <button class="ga-button icon" v-nt-tooltip="`오른쪽 정렬 보정`">
+      <button class="ga-button icon" v-nt-tooltip="`오른쪽 컨텐츠 충돌 시 오른쪽 정렬로 보정`">
         Center -> End 보정
         <i class="fa fa-arrow-right"></i>
       </button>
@@ -338,5 +338,10 @@ const codes = computed(() => {
   border: 1px solid #464646;
   color: #999;
   margin-bottom: 5px;
+}
+.tooltip-grid {
+  .column {
+    display: flex;
+  }
 }
 </style>
