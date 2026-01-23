@@ -1,7 +1,7 @@
 {
   "name": "vue-nt-tooltip",
   "private": false,
-  "version": "0.2.2",
+  "version": "0.2.3",
   "type": "module",
   "scripts": {
     "dev": "MODE=demo vite",
@@ -16,7 +16,8 @@
     ".": {
       "import": "./dist/nt-tooltip.es.js",
       "require": "./dist/nt-tooltip.umd.js"
-    }
+    },
+    "./tooltip.css": "./dist/tooltip.css"
   },
   "files": [
     "dist",
@@ -31,7 +32,6 @@
     "tooltip",
     "directive"
   ],
-  "style": "./dist/tooltip.css",
   "peerDependencies": {
     "vue": "^3.3.4"
   },
