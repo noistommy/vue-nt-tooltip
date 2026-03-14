@@ -42,8 +42,6 @@ const codes = computed(() => {
     align: `<element v-nt-tooltip:${align.value}="\`${align.value.toUpperCase()}\`"></element>`,
   }
 })
-
-
 </script>
 
 <template>
