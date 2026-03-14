@@ -180,6 +180,7 @@ const tooltipDirective = (options) => {
   return {
     // v-ga-tooltip:arg.modifiers
     created(el, binding) {
+      console.log(el)
       removeEvent(el)
       setOptionsRel(binding, options)
     },
@@ -197,8 +198,8 @@ const tooltipDirective = (options) => {
     // },
     // parent, child component 가 업데이트 된 후 노출
     updated(el, binding) {
-      removeEvent(el)
       if (isBindingValueChanged(binding.value, binding.oldValue)) { 
+        removeEvent(el)
         createEvent(el, binding)
       }
     },

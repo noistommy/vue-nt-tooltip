@@ -186,7 +186,7 @@ const codes = computed(() => {
           <div class="column col-3 col-xs-12">
             <button class="ga-button text fluid">Top | Left</button>
           </div>
-          <div class="column col-6  col-xs-12" :style="{ 'textAlign': 'center' }">
+          <div class="column col-6  col-xs-12" :style="{ textAlign: 'center' }">
             <button class="ga-button" v-nt-tooltip:top.end="`TOP-END<br>${p}`" @mouseenter="setAlign('top.start')">T-END</button>
             <button class="ga-button" v-nt-tooltip:top="`TOP-CENTER<br>${p}`" @mouseenter="setAlign('top.center')">T-CENTER</button>
             <button class="ga-button" v-nt-tooltip:top.start="`TOP-START<br>${p}`" @mouseenter="setAlign('top.end')">T-START</button>
@@ -222,7 +222,7 @@ const codes = computed(() => {
           <div class="column col-3 col-xs-12">
             <button class="ga-button text fluid">Bottom | Left</button>
           </div>
-          <div class="column col-6 col-xs-12"  :style="{ 'textAlign': 'center' }">
+          <div class="column col-6 col-xs-12"  :style="{ textAlign: 'center' }">
             <button class="ga-button" v-nt-tooltip:bottom.end="`BOTTOM-END<br>${p}`" @mouseenter="setAlign('bottom.end')">B-END</button>
             <button class="ga-button" v-nt-tooltip:bottom="`BOTTOM-CENTER<br>${p}`" @mouseenter="setAlign('bottom.center')">B-CENTER</button>
             <button class="ga-button" v-nt-tooltip:bottom.start="`BOTTOM-START<br>${p}`" @mouseenter="setAlign('bottom.start')">B-START</button>
