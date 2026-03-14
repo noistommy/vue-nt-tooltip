@@ -152,7 +152,6 @@ const tooltipDirective = (options) => {
         showTooltip(el, binding)
         isShow = true
       }
-      console.log(isShow)
     }
     const trigger = binding.value?.trigger || options.trigger
     if (trigger === 'click') {
@@ -180,7 +179,6 @@ const tooltipDirective = (options) => {
   return {
     // v-ga-tooltip:arg.modifiers
     created(el, binding) {
-      console.log(el)
       removeEvent(el)
       setOptionsRel(binding, options)
     },

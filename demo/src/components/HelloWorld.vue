@@ -26,7 +26,6 @@ const setAlign = (value) =>{align.value = value}
 
 const showEx = ref(false);
 const toggleEx = () => {
-  console.log(showEx.value)
   showEx.value = !showEx.value
 }
 const codes = computed(() => {
