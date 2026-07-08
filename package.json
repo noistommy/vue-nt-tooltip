@@ -8,7 +8,8 @@
     "build": "npm run build:code",
     "build:code": "MODE=lib vite build",
     "build:demo": "MODE=demo vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docs": "rm -rf docs && cp -rf demo/dist docs"
   },
   "main": "./dist/nt-tooltip.umd.js",
   "module": "./dist/nt-tooltip.es.js",
