@@ -25,7 +25,7 @@
           </div>
           <div class="ga-button compact icon">
             <i class="xi-home" />
-            <a class="link" href="/" target="_blank"></a>
+            <a className="link" href="https://nt-cabinet.vercel.app/" target="_blank"></a>
           </div>
         </div>
       </div>
