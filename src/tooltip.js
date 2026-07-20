@@ -1,11 +1,12 @@
 let ref = null
 let opt = {}
+let currentPos = ''
 const showTooltip = (el, binding) => {
   if (binding.value === '') return
   
   if (ref) hideTooltip()
   const ttEl = document.createElement('div')
-
+  ttEl.style.tranform = 'scale(0)';
   setAttributeRef(ttEl, binding)
   if (binding.value.self) {
     el.append(ttEl)
@@ -13,6 +14,12 @@ const showTooltip = (el, binding) => {
     document.body.append(ttEl)
   }
   setPositionRef(el, binding, ttEl)
+  window.addEventListener('scroll', () => setPositionRef(el, binding, ref) )
+  window.addEventListener('resize', () => setPositionRef(el, binding, ref) )
+
+  requestAnimationFrame(() => {
+    ttEl.classList.add('show')
+  });
 }
 
 const setOptionsRel = (binding, options) => {
@@ -24,7 +31,7 @@ const setOptionsRel = (binding, options) => {
 
 const setAttributeRef = (reel, binding) => {
   reel.innerHTML = typeof binding.value === 'object' ? binding.value.contents : binding.value
-  reel.classList.add('base-tooltip', opt.customClass , `theme-${binding.value?.theme || opt.theme}`, opt.size)
+  reel.classList.add('base-tooltip', opt.customClass , `theme-${binding.value?.theme || opt.theme}`, opt.size, opt.motion)
   reel.style.maxWidth = binding.value.size ? binding.value.size + 'px' : opt.maxWidth + 'px'
   if (binding.value.padding) {
     reEl.style.padding = binding.value.padding
@@ -92,12 +99,15 @@ const setPositionRef = (el, binding, ref) => {
     ref.style.top = align === 'center' ? cPos + 'px' : align === 'end' ? endPos + 'px' : ePos.top + 'px'
 
   }
-
+  if (currentPos) ref.classList.remove(currentPos)
   ref.classList.add(`${dir}-${align}`)
+  currentPos = `${dir}-${align}`
 }
 
-const hideTooltip = () => {
+const hideTooltip = (el, binding) => {
   if (ref) {
+    window.removeEventListener('scroll', () => setPositionRef(el, binding, ref) )
+    window.removeEventListener('resize', () => setPositionRef(el, binding, ref) )
     ref.remove()
   }
 }
@@ -141,12 +151,12 @@ const tooltipDirective = (options) => {
       isShow = true
     }
     hide = () => {
-      hideTooltip()
+      hideTooltip(el, binding)
       isShow = false
     }
     toggle = () => { 
       if (isShow) {
-        hideTooltip()
+        hideTooltip(el, binding)
         isShow = false
       } else {
         showTooltip(el, binding)

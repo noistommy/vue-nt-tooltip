@@ -31,7 +31,7 @@ const selectTheme = (mode) => {
       <nav>
         <!-- <li><div class="ga-button">A</div></li> -->
         <li>
-          <div class="ga-buttons round">
+          <div class="ga-buttons">
             <div class="ga-button icon" v-nt-tooltip:bottom="`Light Mode`" :class="{selected: theme === 'light'}" @click="selectTheme('light')"><i class="xi-sun" /></div>
             <div class="ga-button icon" v-nt-tooltip:bottom="`Dark Mode`" :class="{selected: theme === 'dark'}" @click="selectTheme('dark')"><i class="xi-moon" /></div>
             <div class="ga-button icon" v-nt-tooltip:bottom="`System Setting`" :class="{selected: theme === 'system'}" @click="selectTheme('system')"><i class="xi-desktop" /></div>

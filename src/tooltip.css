@@ -7,8 +7,16 @@
     z-index: 9999;
     word-break: break-all;
     filter: drop-shadow(0 0 5px #50505033);
-
+    /* transition: transform 250ms ease; */
 }
+
+.base-tooltip.show.slide {
+  animation:  fadein 0.3s ease, slide-up 0.3s ease;
+}
+.base-tooltip.show.scale {
+  animation:  fadein 0.3s ease, scale 0.3s ease;
+}
+
 .base-tooltip.small {
      padding: 5px 10px;
      font-size: .8em;
@@ -89,4 +97,38 @@
 
   filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.16));
   border-radius: 8px;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes scale {
+  0% {
+    scale: 0;
+  }
+  100% {
+    scale: 1;
+  }
+}
+@keyframes slide-up {
+  0% {
+    translate: 0 10px;
+  }
+  100% {
+    translate: 0 0;
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    translate: 0 -10px;
+  }
+  100% {
+    translate: 0 0;
+  }
 }

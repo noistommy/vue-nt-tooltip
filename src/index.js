@@ -11,7 +11,8 @@ const defaultOptions = {
   textAlign: 'left',
   offset: 10,
   customClass: 'ga-tooltip',
-  isUse: true
+  isUse: true,
+  motion: 'scale' // slide, fade
 }
 export default {
   install(app, options = {}) {
