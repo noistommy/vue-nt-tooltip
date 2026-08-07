@@ -1,7 +1,8 @@
 {
   "name": "vue-nt-tooltip",
   "private": false,
-  "version": "0.3.0",
+  "version": "1.0.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "MODE=demo vite",

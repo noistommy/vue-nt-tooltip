@@ -147,6 +147,7 @@ const tooltipDirective = (options) => {
   let isShow = false
   const createEvent = (el, binding) => {
     show = () => {
+      event.preventDefault();
       showTooltip(el, binding)
       isShow = true
     }
@@ -171,8 +172,8 @@ const tooltipDirective = (options) => {
       el.addEventListener('mouseenter', show)
       el.addEventListener('mouseleave', hide)
 
-      el.addEventListener('touchstart', show)
-      el.addEventListener('touchend', hide)
+      // el.addEventListener('touchstart', show)
+      // el.addEventListener('touchend', hide)
     }
   }
   const removeEvent = el => {
@@ -182,8 +183,8 @@ const tooltipDirective = (options) => {
       
       el.removeEventListener('mouseenter', show)
       el.removeEventListener('mouseleave', hide)
-      el.removeEventListener('touchstart', show)
-      el.removeEventListener('touchend', hide)
+      // el.removeEventListener('touchstart', show)
+      // el.removeEventListener('touchend', hide)
     }
   }
   return {
