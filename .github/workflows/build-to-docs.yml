@@ -35,8 +35,8 @@ jobs:
         run: cp -r demo/dist/* docs/
       - run: echo "🎉 The build files have been copied to docs."
       - name: Commit changes
-        run: |
-          git add docs/
-          git commit -m "Update docs"
-          git push origin main
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-build and update docs [skip ci]"
+          branch: main
       - run: echo "🎉 The changes have been committed and pushed to the main branch."
