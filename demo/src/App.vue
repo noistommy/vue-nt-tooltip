@@ -21,11 +21,20 @@ const selectTheme = (mode) => {
 
 <template>
   <header>
-    <div class="main-title" v-nt-tooltip="{contents: `Welcome to NT!!`, theme: 'light'}">
+    <div class="base-tooltip ga-tooltip invert top-center huge" :style="{
+          position: 'relative',
+          top: '0',
+          left: '50%',
+          texstAlign: 'center',
+          transform: 'translateX(-50%)'
+        }">
+          Welcome <span class="bold px-2"> NT Tooltip</span>!!
+        </div>
+    <div class="main-title">
       NT Tooltip
     </div>
     <div class="main-description">
-      NT Tooltip is a user-defined directive for vue.
+      NT Tooltip is a user-defined directive for <span class="ga-tag lightgreen label mx-1">Vue</span>.
     </div>
     <div class="menu-wrapper">
       <nav>
