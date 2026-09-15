@@ -35,7 +35,8 @@ jobs:
         run: cp -r demo/dist/* docs/
       - run: echo "🎉 The build files have been copied to docs."
       - name: Commit changes
-        run: git add docs/
-        run: git commit -m "Update docs"
-        run: git push origin main
+        run: |
+          git add docs/
+          git commit -m "Update docs"
+          git push origin main
       - run: echo "🎉 The changes have been committed and pushed to the main branch."
