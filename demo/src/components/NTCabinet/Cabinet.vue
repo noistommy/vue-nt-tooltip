@@ -1,4 +1,8 @@
 <script setup>
+import Drawer from './Drawer.vue'
+import NTIcon from './img/nt-profile.svg'
+import { PROFILE, DS, BEUI, REACT_MODULES, VUE_MODULES } from './moduleData.js'
+
 
 </script>
 
@@ -9,7 +13,7 @@
     <div class="header ga flex between">
       <div  class="logo">
         <div class="ga flex gap-1">
-          <img src="./img/nt-profile.svg" alt="logo" width="25px" />
+          <img :src="NTIcon" alt="logo" :style="{width: '25px'}" />
           <div class="bolder large">NT Cabinet</div>
         </div>
       </div>
@@ -17,15 +21,15 @@
         <div class="ga-buttons">
           <div class="ga-button compact icon">
             <i class="xi-mail" />
-            <a class="link" href="mailto:noistommy@gmail.com" target="_blank"></a>
+            <a class="link" :href="PROFILE.email" target="_blank"></a>
           </div>
           <div class="ga-button compact icon">
             <i class="xi-linkedin" />
-            <a class="link" href="https://www.linkedin.com/in/minyoung-kim-noistommy" target="_blank"></a>
+            <a class="link" :href="PROFILE.linkedin" target="_blank"></a>
           </div>
           <div class="ga-button compact icon">
             <i class="xi-home" />
-            <a className="link" href="https://nt-cabinet.vercel.app/" target="_blank"></a>
+            <a className="link" :href="PROFILE.homepage" target="_blank"></a>
           </div>
         </div>
       </div>
@@ -35,98 +39,29 @@
       <div class="column span-4 span-xs-12 pr-10">
         <h5 class="header gray-txt-40">Design system</h5>
         <div class="ga-list">
-          <div class="item p-1">
-            <img class="logo-img" src="./img/frog-profile.svg" alt="logo" /> 
-            <div class="item-title ml-4">Frog UI</div>
-            <div class="btn-set">
-              <div class="ga-button icon compact">
-                <i class="xi-link"></i>
-                <a class="link" href="https://frog-ui-css.vercel.app" target="_blank"></a>
-              </div>
-            </div>
-          </div>
+          <Drawer :logo="NTIcon" name="Frog UI" link="https://frog-ui-css.vercel.app" />      
         </div>
         <h5 class="header gray-txt-40">UI Components</h5>
         <div class="ga-list">
-          <div class="item p-1">
-            <img src="./img/be-ui-vue.svg" alt="logo" class="logo-img" /> 
-            <div class="item-title ml-4">BEUI - Vue</div>
-            <div class="btn-set">
-              <div class="ga-button icon compact">
-                <i class="xi-link"></i>
-                <a class="link" href="https://beui.vercel.app" target="_blank"></a>
-              </div>
-            </div>
-          </div>
-          <div class="item p-1">
-            <img src="./img/be-ui-react.svg" alt="logo" class="logo-img" /> 
-            <div class="item-title ml-4">BEUI - React</div>
-            <div class="btn-set">
-              <div class="ga-button icon compact">
-                <i class="xi-link"></i>
-                <a class="link"  href="https://react-ga-ui.vercel.app" target="_blank"></a>
-              </div>
-            </div>
-          </div>
+          <template v-for="item in BEUI">
+            <Drawer :logo="item.logo" :name="item.name" :link="item.link" :current="item.current" />  
+          </template>
         </div>
       </div>
       <div class="column span-4 span-xs-12 pr-10">
         <h5 class="header gray-txt-40">Modules by react</h5>
         <div class="ga-list">
-          <div class="item p-1">
-            <img src="./img/nt-profile.svg" alt="logo" class="logo-img" />
-            <div class="item-title ml-4">NT Modal</div>
-            <div class="btn-set">
-              <div class="ga-button compact icon">
-                <i class="xi-link"></i>
-                <a class="link" href="https://noistommy.github.io/react-nt-modal" target="_blank"></a>
-              </div>
-            </div>
-          </div>
-          <div class="item p-1">
-            <img src="./img/nt-profile.svg" alt="logo" class="logo-img" />
-            <div class="item-title ml-4">NT Toast</div>
-            <div class="btn-set">
-              <div class="ga-button icon compact">
-                <i class="xi-link"></i>
-                <a class="link" href="https://noistommy.github.io/react-nt-toast" target="_blank"></a>
-              </div>
-            </div>
-          </div>
+          <template v-for="item in REACT_MODULES">
+            <Drawer :logo="item.logo" :name="item.name" :link="item.link" :current="item.current" />  
+          </template>
         </div>
       </div>
       <div class="column span-4 span-xs-12 pr-10">
         <h5 class="header gray-txt-40">Modules by vue</h5>
         <div class="ga-list">
-          <div class="item p-1">
-            <img src="./img/nt-profile.svg" alt="logo" class="logo-img" />
-            <div class="item-title ml-4">NT Modal</div>
-            <div class="btn-set">
-              <div class="ga-button icon compact">
-                <i class="xi-link"></i>
-                <a class="link" href="https://noistommy.github.io/vue-nt-modal" target="_blank"></a>
-              </div>
-            </div>
-          </div>
-          <div class="item p-1">
-            <img src="./img/nt-profile.svg" alt="logo" class="logo-img" />
-            <div class="item-title ml-4">NT Toast</div>
-            <div class="btn-set">
-              <div class="ga-button icon compact">
-                <i class="xi-link"></i>
-                <a class="link" href="https://noistommy.github.io/vue-nt-toast" target="_blank"></a>
-              </div>
-            </div>
-          </div>
-          <div class="item p-1">
-            <img src="./img/nt-profile.svg" alt="logo" class="logo-img" />
-            <div class="item-title ml-4">NT Tooltip</div>
-            <div class="btn-set">
-              <div class="ga-button round compact">
-                Current
-              </div>
-            </div>
-          </div>
+          <template v-for="item in VUE_MODULES">
+            <Drawer :logo="item.logo" :name="item.name" :link="item.link" :current="item.current" />  
+          </template>
         </div>
       </div>
     </div>
@@ -134,7 +69,7 @@
   <hr class="ga hr" />
   <div class="copylight mt-4 ga-tags attached">
     <span class="ga-tag label deepblue">Copyright</span>
-    <span class="ga-tag label deepblue-light">© 2016-present Kim Minyoung</span>
+    <span class="ga-tag label deepblue-light">© {{new Date().getFullYear()}} Kim Minyoung</span>
     <span class="ga-tag pointing left secondary">noistommy</span>
   </div>
 </footer>
