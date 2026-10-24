@@ -1,7 +1,7 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 
-import Cabinet from './components/NTCabinet/Cabinet.vue'
+import 'nt-cabinet-component'
 
 import {ref, computed} from 'vue'
 
@@ -59,7 +59,7 @@ const selectTheme = (mode) => {
   <main>
     <HelloWorld :theme="theme" msg="Nt Tooltip" />
   </main>
-  <Cabinet />
+  <nt-cabinet module="vue-nt-tooltip" />
 </template>
 
 <style scoped>
